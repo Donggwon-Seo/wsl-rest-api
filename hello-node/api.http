@@ -1,0 +1,26 @@
+GET localhost:3000/users
+Accept: application/json
+
+###
+POST localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "JinWook",
+  "blogName": "Jimwook blog"
+}
+
+###
+PATCH localhost:3000/users/5
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "JinWook Lee",
+  "blogName": "Jimwook blog"
+}
+
+###
+DELETE localhost:3000/users/4
+
+

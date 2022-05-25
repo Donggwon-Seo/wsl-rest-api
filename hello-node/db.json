@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "idx": 1,
+      "id" : "ft0001@naver.com",
+      "name": "Minseok Choi",
+      "password" : "1234",
+      "blogName": "Minseok Choi blog"
+    },
+    {
+      "idx": 2,
+      "id" : "ehdrnjsdl920@naver.com",
+      "name": "Donggwon Seo",
+      "password" : "1234",
+      "blogName": "Donggwon Seo blog"
+    },
+    {
+      "idx": 3,
+      "id" : "tpsk8322@naver.com",
+      "name": "Sena Lim",
+      "password" : "1234",
+      "blogName": "Sena Lim blog",
+    }
+  ],
+
+  "image": [
+    {
+      "id": 1,
+      "data": [
+        {
+          "name": "5.jpg",
+          "size": "98766"
+        },
+        {
+          "name": "6.jpg",
+          "size": "98763"
+        },
+        {
+          "name": "7.jpg",
+          "size": "98769"
+        },
+        {
+          "name": "8.jpg",
+          "size": "13456"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "data": [
+        {
+          "name": "11.jpg",
+          "size": "98765",
+          "files": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "data": [
+        {
+          "name": "5-3.jpg",
+          "size": "98766"
+        }
+      ]
+    }
+  ]
+}
