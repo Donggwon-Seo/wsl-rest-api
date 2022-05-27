@@ -1,11 +1,25 @@
 {
   "users": [
     {
-      "idx": 1,
-      "id" : "ft0001@naver.com",
+      "separator": 1,
+      "id": "ft0001@naver.com",
       "name": "Minseok Choi",
-      "password" : "1234",
+      "password": "1234",
       "blogName": "Minseok Choi blog"
+    },
+    {
+      "separator": 2,
+      "id": "ehdrnjsdl920@daum.net",
+      "name": "Donggwon",
+      "password": "1234",
+      "blogName": "Donggwon Seo blog"
+    },
+    {
+      "separator": 3,
+      "id": "limsena@naver.com",
+      "name": "SenaLim",
+      "password": "1234",
+      "blogName": "Sena Lim blog"
     }
   ]
 }
