@@ -13,10 +13,9 @@ app.get('/users', (req, res, next) => {
     fs.readFile('./db.json', 'utf-8', function (err, data) {
         body = data;
         res.end(body);
-        //res.end("GET Request Success")
+        //res.end("GET Request Success");
         console.log("GET 요청이 수행됨");
     })
-
 });
 
 app.post('/inquire', (req, res) => {
