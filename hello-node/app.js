@@ -9,6 +9,17 @@ app.use(express.urlencoded({
 }));
 
 app.get('/users', (req, res, next) => {
+    let body = '';
+    fs.readFile('./db.json', 'utf-8', function (err, data) {
+        body = data;
+        res.end(body);
+        //res.end("GET Request Success")
+        console.log("GET 요청이 수행됨");
+    })
+
+});
+
+app.post('/inquire', (req, res) => {
     fs.readFile('./db.json', 'utf8',
         (error, jsonFile) => {
             if (error) return console.log(error);
@@ -31,8 +42,17 @@ app.get('/users', (req, res, next) => {
                         let userName = JSON.parse(userData).name;
                         let userBlogName = JSON.parse(userData).blogName;
                         console.log(userId, userName, userBlogName);
-                        res.end("ID:" + userId + "\n" + "Name:" + userName + "\n" +
-                            "BlogName:" + userBlogName);
+
+                        const person = {
+                            id: userId,
+                            name: userName,
+                            blogName: userBlogName
+                        }
+
+                        /* res.end("ID:" + userId + "\n" + "Name:" + userName + "\n" +
+                            "BlogName:" + userBlogName); */
+
+                        res.end(JSON.stringify(person));
                         isDuplicated = false;
                         break;
                     }
@@ -49,6 +69,7 @@ app.get('/users', (req, res, next) => {
         });
 
 });
+
 
 app.post('/login', (req, res) => {
     console.log("Request Success");
@@ -79,7 +100,7 @@ app.post('/login', (req, res) => {
                     }
                 }
                 isDuplicated = true;
-                code = 404;
+                code = 404; // not page 200 : 요청은 성공하였으나 ~~ // 에러코드 확인
                 message = "Login failed";
             }
             if (isDuplicated) {
@@ -126,14 +147,17 @@ app.post('/signup', (req, res) => {
                 }
             }
 
+            //json 속성 핸들링 가능 // 변수 찾고 꺼내기
+
             if (isDuplicated) {
                 res.status(code).send(message);
             } else {
                 users.push(req.body);
                 const newUsersData = {users};
-                fs.writeFile('./db.json', JSON.stringify(newUsersData), "utf8", (err) => {
+                fs.writeFile('./db.json', JSON.stringify(newUsersData, null, 4),
+                    "utf8", (err) => {
 
-                });
+                    });
                 res.end("SignUp Success !");
                 console.log(newUsersData);
             }
@@ -157,15 +181,20 @@ app.delete('/users', (req, res) => {
 
             let isDuplicated = false;
 
+            // json 에서 인덱스로 빼는 방법
+            // splice 말고 새로운 방법 찾기
+            // 객체의 속성만 바꾸는 방법도 찾아보기, add 나 delete 라는 메소드로 가능
+
             for (let idx = 0; idx < users.length; idx++) {
                 const user = users[idx];
                 if (user.id === id) {
-                    if (user.password === password) {
-                        users.splice((separator - 1), 1);
+                    if (user.password === password) {  // user 만 찾고
+                        users.splice(idx, 1); // 인덱스 users[idx] 문제 해결
                         isDuplicated = false;
                         const newUsersData = {users};
-                        fs.writeFile('./db.json', JSON.stringify(newUsersData), "utf8", (err) => {
-                        });
+                        fs.writeFile('./db.json', JSON.stringify(newUsersData, null, 4),
+                            "utf8", (err) => {
+                            });
                         break;
                     }
                 }
@@ -173,9 +202,10 @@ app.delete('/users', (req, res) => {
                 code = 404;
                 message = "ID or Password do not match\n"
             }
+
             if (isDuplicated) {
                 res.status(code).send(message);
-            }else{
+            } else {
                 res.end("Delete Success !");
             }
         });
